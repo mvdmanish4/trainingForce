@@ -22,9 +22,18 @@ def hello():
 def sentimentScore():
 	return "Return Sentiment Score"
 
-@app.route("/setInent")
-def setIntent():
-	return "Return Set Intent"
+#http://127.0.0.1:5000/data?user=some-value
+@app.route('/data')
+def data():
+    # here we want to get the value of user (i.e. ?user=some-value)
+    user = request.args.get('user')
+    return user
+
+@app.route("/Data")
+def geData():
+	url = 'https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=AAPL&calendardate=2015-12-31&dimension=MRY&api_key=WyHRuMayFcNMsuCyMYSz'
+	resp = requests.get(url=url)
+	return resp.content
 
 if __name__ == "__main__":
 	app.debug = True
